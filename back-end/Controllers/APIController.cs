@@ -174,6 +174,29 @@ namespace WebApi.Controllers
             }
         }
 
+        [Route("customer/list")]
+        [HttpPost]
+        public GetListCustomerResponse GetAlUsers()
+        {
+            try
+            {
+                var listCustomer = context.Customers.Where(w => w.Active == true).ToList() ?? new List<Customer>();
+                return new GetListCustomerResponse
+                {
+                    ListCustomer = listCustomer,
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception e)
+            {
+                return new GetListCustomerResponse
+                {
+                    ListCustomer = null,
+                    StatusCode = (int)HttpStatusCode.BadRequest
+                };
+            }
+        }
+
         //[Route("customer/orders")]
         //[HttpPost]
         //public CustomerOrderResponse CustomerOrder([FromBody] CustomerOrderRequest request)
@@ -197,7 +220,7 @@ namespace WebApi.Controllers
         //                OrderItemName = request.OrderItemName,
         //                OrderItemQty = request.OrderItemQty 
         //            };
-                    
+
         //            context.OrderDetails.Add(oderDetail);
         //            context.SaveChanges();
         //            context.Dispose();
