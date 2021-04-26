@@ -9,5 +9,8 @@
         public string RestaurantPhone { get; set; }
         public decimal? Longitude { get; set; }
         public decimal? Latitude { get; set; }
+        public string Base64Value { get; set; }
+        public string ImageName { get; set; }
+        public string ContentType { get; set; }
     }
 }

@@ -91,13 +91,29 @@ namespace WebApi.Controllers
                 var restaurant = context.Restaurants.FirstOrDefault(p => p.RestaurantId == request.RestaurantId && p.Active == true);
                 if (restaurant != null)
                 {
-                    restaurant.Latitude = request.Latitude;
-                    restaurant.Longitude = request.Longitude;
-                    restaurant.RestaurantAddress = request.RestaurantAddress;
-                    restaurant.RestaurantEmail = request.RestaurantEmail;
-                    restaurant.RestaurantPhone = request.RestaurantPhone;
-                    restaurant.RestaurantName = request.RestaurantName;
+                    var basePath = "upload\\restaurant";
+                    var imagePath = basePath + "\\" + request.ImageName;
+
+                    restaurant.RestaurantName = request.RestaurantName ?? "";
+                    restaurant.RestaurantAddress = request.RestaurantAddress ?? "";
+                    restaurant.RestaurantEmail = request.RestaurantEmail ?? "";
+                    restaurant.RestaurantPhone = request.RestaurantPhone ?? "";
+                    restaurant.Longitude = request.Longitude ?? null;
+                    restaurant.Latitude = request.Latitude ?? null;
+                    if (request.ImageName != null && request.ImageName.Length > 0)
+                    {
+                        restaurant.ImagePath = imagePath;
+                        restaurant.ImageType = request.ContentType;
+                    }
                     context.Restaurants.Update(restaurant);
+                    if (request.ImageName != null && request.ImageName.Length > 0) { 
+                        #region create image 
+                        string contentRootPath = _webHostEnvironment.ContentRootPath;
+                    var path = Path.Combine(contentRootPath, imagePath);
+                    
+                    UploadAdapter.UploadImage(basePath, request.ImageName, request.Base64Value);
+                        #endregion
+                    }
                     context.SaveChanges();
                     context.Dispose();
                 }
@@ -128,7 +144,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<Restaurant> listRestaurant = context.Restaurants.ToList() ?? new List<Restaurant>();
+                List<Restaurant> listRestaurant = context.Restaurants.Where(w => w.Active == true).ToList() ?? new List<Restaurant>();
                 if (listRestaurant != null)
                 {
                     var listRestaurantResponse = new List<RestaurantModel>();
@@ -145,9 +161,9 @@ namespace WebApi.Controllers
                             byte[] b = System.IO.File.ReadAllBytes(path);
                             base64 = Convert.ToBase64String(b);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
-                           
+
                         }
 
                         listRestaurantResponse.Add(new RestaurantModel

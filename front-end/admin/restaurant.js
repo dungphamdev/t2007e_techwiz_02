@@ -121,7 +121,10 @@ async function createRestaurant() {
     if (pair[0] == "id") restaurant_ID = pair[1];
   }
 
-  if (restaurant_ID === 0) {
+  console.log('restaurant_ID:',restaurant_ID)
+
+
+  if (restaurant_ID == 0) {
     data = { ...restaurantModel };
     $("#createBtn").html("Save");
 
@@ -137,14 +140,15 @@ async function createRestaurant() {
         console.log("Success:", res);
         let response = { ...res };
         if (response.statusCode === 200) {
+          // thoong bao thanh cong
         } else {
+          // thong bao loi
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   } else {
-    
     restaurantModel.restaurantId = Number(restaurant_ID);
     data = { ...restaurantModel };
     console.log(data)
@@ -160,6 +164,8 @@ async function createRestaurant() {
         console.log("Success:", res);
         let response = { ...res };
         if (response.statusCode === 200) {
+          // thong bao thanh cong
+          location.reload(); 
         } else {
         }
       })
