@@ -9,6 +9,8 @@ using System.Net;
 using System.Threading.Tasks;
 using WebApi.Entities.Models;
 using WebApi.Helpers;
+using WebApi.Messages.Requests.item;
+using WebApi.Messages.Response.item;
 using WebApi.Models.items;
 
 namespace WebApi.Controllers
@@ -165,7 +167,7 @@ namespace WebApi.Controllers
                 if (request != null)
                 {
                     Item item = context.Items.FirstOrDefault(p => p.ItemId == request.ItemId && p.Active == true);
-                    if(item != null)
+                    if (item != null)
                     {
                         var basePath = "upload\\restaurant";
                         var imagePath = basePath + "\\" + request.ImageName;
@@ -191,7 +193,7 @@ namespace WebApi.Controllers
 
                             UploadAdapter.UploadImage(basePath, request.ImageName, request.Base64Value);
                             #endregion
-                        }   
+                        }
 
                         context.Update(item);
                         context.SaveChanges();
@@ -265,6 +267,64 @@ namespace WebApi.Controllers
             catch (Exception e)
             {
                 return new DeleteItemResponse
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest
+                };
+            }
+        }
+
+        [Route("item/getImageById")]
+        [HttpPost]
+        public GetImageItemResponse GetImageItemById(GetImageItemByIdRequest request)
+        {
+            try
+            {
+                if (request.ListItemId == null) request.ListItemId = new List<int>();
+                List<Item> listItem = context.Items.Where(w => w.Active == true && request.ListItemId.Contains(w.ItemId)).ToList() ?? new List<Item>();
+
+                var listResponse = new List<ItemModel>();
+
+                listItem?.ForEach(item =>
+                {
+                    var listImageString = item.MainImagePath.Split('\\');
+                    string base64 = null;
+                    try
+                    {
+                        var imagePath = item.MainImagePath.Replace('/', '\\');
+                        string contentRootPath = _webHostEnvironment.ContentRootPath;
+                        var path = Path.Combine(contentRootPath, imagePath);
+                        byte[] b = System.IO.File.ReadAllBytes(path);
+                        base64 = Convert.ToBase64String(b);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+
+                    listResponse.Add(new ItemModel
+                    {
+                        ItemId = item.ItemId,
+                        ItemName = item.ItemName,
+                        RestaurantId = item.RestaurantId,
+                        ItemDescription = item.ItemDescription,
+                        ItemPrice = item.ItemPrice,
+                        ItemCategoryId = item.ItemCategoryId,
+                        MainImagePath = item.MainImagePath,
+                        ImageType = item.ImageType,
+                        ImageName = listImageString.LastOrDefault() ?? "",
+                        ImageSrc = item.ImageType + "," + base64,
+                    });
+                });
+
+                var result = new GetImageItemResponse
+                {
+                    ListItem = listResponse,
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new GetImageItemResponse
                 {
                     StatusCode = (int)HttpStatusCode.BadRequest
                 };

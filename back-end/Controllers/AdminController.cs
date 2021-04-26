@@ -133,5 +133,53 @@ namespace WebApi.Controllers
                 };
             }
         }
+
+
+        [Route("billing/createOrder")]
+        [HttpPost]
+        public CreateOrderResponse CreateOrder([FromBody] CreateOrderRequest request)
+        {
+            try
+            {
+
+                var newOrder = new Billing();
+                
+                newOrder.CustomerId = request.BillingItem.CustomerId;
+                newOrder.RestaurantId = request.BillingItem.RestaurantId;
+                newOrder.BillAmout = request.BillingItem.BillAmout;
+                newOrder.OrderDate = DateTime.Now;
+                newOrder.StatusId = 1;
+
+                context.Billings.Add(newOrder);
+                context.SaveChanges();
+
+                var newListOrder = new List<OrderDetail>();
+
+                request.BillingItem.OrderDetail?.ForEach(item =>
+                {
+                    newListOrder.Add(new OrderDetail
+                    {
+                        OrderId = newOrder.OrderId,
+                        ItemQty = item.ItemQty,
+                        ItemId = item.ItemId
+                    });
+                });
+
+                context.OrderDetails.AddRange(newListOrder);
+                context.SaveChanges();
+
+                return new CreateOrderResponse
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception e)
+            {
+                return new CreateOrderResponse
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest
+                };
+            }
+        }
     }
 }

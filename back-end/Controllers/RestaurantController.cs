@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using WebApi.Helpers;
 using WebApi.Models.restaurants;
+using WebApi.Messages.Response.restaurants;
+using WebApi.Messages.Requests.restaurants;
 
 namespace WebApi.Controllers
 {
@@ -179,6 +181,7 @@ namespace WebApi.Controllers
                             ImageName = listImageString.LastOrDefault() ?? "",
                             ImageSrc = e.ImageType + "," + base64
                         });
+
                     }
                     );
 
@@ -239,5 +242,98 @@ namespace WebApi.Controllers
                 };
             }
         }
+
+        [Route("restaurant/getRestaurantById")]
+        [HttpPost]
+        public GetRestaurantByIdResponse GetRestaurantById([FromBody] GetRestaurantByIdRequest request)
+        {
+            try
+            {
+                var restaurant = context.Restaurants.FirstOrDefault(f => f.RestaurantId == request.RestaurantId);
+                var listItem = context.Items.Where(w => w.RestaurantId == request.RestaurantId).ToList() ?? new List<Item>();
+                var listItemCategory = context.ItemCategories.ToList();
+
+                var restaurantDetail = new RestaurantDetailModel();
+
+                var listImageString = restaurant.ImagePath.Split('\\');
+                string base64 = null;
+                try
+                {
+                    var imagePath = restaurant.ImagePath.Replace('/', '\\');
+                    string contentRootPath = _webHostEnvironment.ContentRootPath;
+                    var path = Path.Combine(contentRootPath, imagePath);
+                    byte[] b = System.IO.File.ReadAllBytes(path);
+                    base64 = Convert.ToBase64String(b);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                restaurantDetail.RestaurantId = restaurant.RestaurantId;
+                restaurantDetail.RestaurantName = restaurant.RestaurantName;
+                restaurantDetail.RestaurantAddress = restaurant.RestaurantAddress;
+                restaurantDetail.RestaurantEmail = restaurant.RestaurantEmail;
+                restaurantDetail.RestaurantPhone = restaurant.RestaurantPhone;
+                restaurantDetail.Longitude = restaurant.Longitude;
+                restaurantDetail.Latitude = restaurant.Latitude;
+                restaurantDetail.ImagePath = restaurant.ImagePath;
+                restaurantDetail.ImageName = listImageString.LastOrDefault() ?? "";
+                restaurantDetail.ImageSrc = restaurant.ImageType + "," + base64;
+
+                listItem?.ForEach(item =>
+                {
+                    var listItemCategoryByItem = listItemCategory.Where(w => w.CategoryId == item.ItemCategoryId).ToList();
+                    var listImageString = item.MainImagePath.Split('\\');
+                    string base64 = null;
+                    try
+                    {
+                        var imagePath = item.MainImagePath.Replace('/', '\\');
+                        string contentRootPath = _webHostEnvironment.ContentRootPath;
+                        var path = Path.Combine(contentRootPath, imagePath);
+                        byte[] b = System.IO.File.ReadAllBytes(path);
+                        base64 = Convert.ToBase64String(b);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+
+                    restaurantDetail.ListItem.Add(new Models.items.ItemModel
+                    {
+                        ItemId = item.ItemId,
+                        ItemName = item.ItemName,
+                        RestaurantId = item.RestaurantId,
+                        ItemDescription = item.ItemDescription,
+                        ItemPrice = item.ItemPrice,
+                        ItemCategoryId = item.ItemCategoryId,
+                        MainImagePath = item.MainImagePath,
+                        ImageType = item.ImageType,
+
+                        ImageName = listImageString.LastOrDefault() ?? "",
+                        ImageSrc = item.ImageType + "," + base64,
+
+                        RestaurantLabel = restaurant?.RestaurantName ?? "",
+                        ItemCategoryLabel = String.Join(", ", listItemCategoryByItem.Select(w => w.CategoryName).ToList())
+                    });
+                });
+
+                return new GetRestaurantByIdResponse
+                {
+                    RestaurantDetail = restaurantDetail,
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+
+            }
+            catch (Exception e)
+            {
+                return new GetRestaurantByIdResponse
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest
+                };
+            }
+        }
+
+
+
     }
 }
