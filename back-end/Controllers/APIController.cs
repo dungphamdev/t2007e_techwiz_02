@@ -74,7 +74,10 @@ namespace WebApi.Controllers
                         CustomerContactPhone = request.customer?.CustomerContactPhone ?? "",
                         Username = request.customer?.Username ?? "",
                         Password = request.customer.Password ?? "",
-                        CustomerAddress = request.customer.CustomerAddress ?? ""
+                        CustomerAddress = request.customer.CustomerAddress ?? "",
+                        Active = true,
+                        IsStaff = request.customer.IsStaff,
+                        RestaurantId = request.customer.RestaurantId
                     };
                     context.Customers.Add(newCustomer);
                     context.SaveChanges();
@@ -114,6 +117,8 @@ namespace WebApi.Controllers
                     customer.CustomerEmailId = request.customer?.CustomerEmailId ?? "";
                     customer.CustomerContactPhone = request.customer?.CustomerContactPhone ?? "";
                     customer.CustomerAddress = request.customer.CustomerAddress ?? "";
+                    customer.IsStaff = request.customer.IsStaff;
+                    customer.RestaurantId = request.customer?.RestaurantId;
                     context.Customers.Update(customer);
                     context.SaveChanges();
                     context.Dispose();
