@@ -32,16 +32,13 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<Item> listItem = context.Items.ToList() ?? new List<Item>();
+                List<Item> listItem = context.Items.Where(w => w.Active == true).ToList() ?? new List<Item>();
 
                 var listRestaurant = context.Restaurants.ToList() ?? new List<Restaurant>();
                 var listItemCategory = context.ItemCategories.ToList();
 
                 if (listItem != null)
                 {
-                    //context.Dispose();
-                    //return new ListItemResponse { list = listItem, StatusCode = (int)HttpStatusCode.OK };
-
                     var listResponse = new List<ItemModel>();
 
                     listItem?.ForEach(item =>
@@ -76,9 +73,6 @@ namespace WebApi.Controllers
 
                             ImageName = listImageString.LastOrDefault() ?? "",
                             ImageSrc = item.ImageType + "," + base64,
-
-                            //RestaurantInfor = restaurant,
-                            //ListItemCategory = listItemCategoryByItem
 
                             RestaurantLabel = restaurant?.RestaurantName ?? "",
                             ItemCategoryLabel = String.Join(", ", listItemCategoryByItem.Select(w => w.CategoryName).ToList())
@@ -173,12 +167,32 @@ namespace WebApi.Controllers
                     Item item = context.Items.FirstOrDefault(p => p.ItemId == request.ItemId && p.Active == true);
                     if(item != null)
                     {
+                        var basePath = "upload\\restaurant";
+                        var imagePath = basePath + "\\" + request.ImageName;
+
                         item.ItemCategoryId = request.ItemCategoryId ?? null;
                         item.ItemDescription = request.ItemDescription ?? "";
                         item.ItemName = request.ItemName ?? "";
                         item.ItemPrice = request.ItemPrice ?? null;
                         item.MainImagePath = request.MainImagePath ?? "";
                         item.RestaurantId = request.RestaurantId ?? null;
+
+                        if (request.ImageName != null && request.ImageName.Length > 0)
+                        {
+                            item.MainImagePath = imagePath;
+                            item.ImageType = request.ContentType;
+                        }
+
+                        if (request.ImageName != null && request.ImageName.Length > 0)
+                        {
+                            #region create image 
+                            string contentRootPath = _webHostEnvironment.ContentRootPath;
+                            var path = Path.Combine(contentRootPath, imagePath);
+
+                            UploadAdapter.UploadImage(basePath, request.ImageName, request.Base64Value);
+                            #endregion
+                        }   
+
                         context.Update(item);
                         context.SaveChanges();
                         context.Dispose();
