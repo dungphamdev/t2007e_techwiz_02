@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
+   
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../slick-1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="../slick-1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="../EasyAutocomplete-1.3.5/EasyAutocomplete-1.3.5/easy-autocomplete.min.css">
+
+    <link rel="stylesheet" href="../css/list-restaurant.css">
+
+    <title>list-restaurant</title>
+
+</head>
+<body>
+    <header>
+        <div class="modal" id="cart">
+            <div class="modal-dialog">
+                <div class="modal-content">
+    
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+    
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg fixed-top  ">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold text-dark" href="#">LOGO</a>
+                <div class="navbar-nav ml-auto">
+                    <div class="row">
+                        <div class="col-6 nav-item">
+                            <a class="nav-link font-weight-bold text-dark" href="#">Login</a>
+                        </div>
+                        <div class="col-6 nav-item">
+                            <a class="nav-link font-weight-bold text-dark" id="showCart" data-toggle="modal"
+                               data-target="#cart" href="#">Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="main" style="background-color: white">
+        <div class="container pt-3 pb-3">
+            <div class="p-1 bg-light rounded rounded-pill shadow-sm mt-4 mb-4">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"
+                                                                                                      style="color: grey"></i>
+                        </button>
+                    </div>
+                    <input id="sh" type="search" placeholder="Search food or restaurant" aria-describedby="button-addon1"
+                           class="form-control border-0 bg-light">
+                </div>
+            </div>
+
+    
+        </div>
+
+        <div class="container">
+            <h1>All restaurants in:</h1>
+            <form action="#" method="post">
+                <br/>
+                <br/>
+
+                <div class="form-row " id="restaurant"></div>
+            </form>
+        </div>
+
+        <div >
+
+        </div>
+    
+    </section>
+    
+    
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script type="text/javascript" src="../slick-1.8.1/slick/slick.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://maps.google.com/maps/api/js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../EasyAutocomplete-1.3.5/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
+  <script src="https://kit.fontawesome.com/402feeb22c.js" crossorigin="anonymous"></script>
+  <script src="list-restaurant.js"></script>
+  <script type="text/javascript">
+
+
+</script>
+</body>
+</html>

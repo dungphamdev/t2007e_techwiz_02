@@ -1,0 +1,380 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open Sans"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <title>Feedback-form</title>
+    <style>
+      p .modal-body {
+        font-family: "Roboto";
+        font-size: 16.5px;
+      }
+
+      .jumbotron {
+        position: absolute;
+        top: 25%;
+        left: 33%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid bg-dark vh-100 row">
+      <div class="container">
+        <div class="jumbotron col-4">
+          <div class="text-center pb-4">
+            <strong>LOGO</strong>
+          </div>
+          <hr />
+          <p class="text-left">
+            A huge thank to you for using FoodMate service <br /><br />
+            It would be even awesome to us if you take a quick feedback of your
+            experiences on FoodMate application which needed to be improved for
+            serving you better. <br /><br />
+            Thanks,<br />
+            FoodMate team.
+          </p>
+          <hr />
+          <div class="text-center pt-4">
+            <button
+              type="button"
+              class="btn btn-info rounded-pill shadow-sm"
+              data-toggle="modal"
+              data-target="#feedback-modal"
+            >
+              Complete feedback form
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="feedback-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Complete feedback form
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" method="#">
+              <p>
+                Please fill out this bref feedback form so we can ensure a top
+                quality experience to you
+              </p>
+              <div class="form-row">
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control shadow-sm"
+                    placeholder="Your name (optional)"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control shadow-sm"
+                    placeholder="Your e-mail (optional)"
+                  />
+                </div>
+              </div>
+              <hr />
+              <div class="form-row">
+                <div class="col">
+                  <p>Is this your first time visit to FootMate application?</p>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="visitYes"
+                        name="visit"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="visitYes"
+                        >Yes</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="visitNo"
+                        name="visit"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="visitNo"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <p>
+                      What is the primay reason for your visit the
+                      web-application?
+                    </p>
+                    <textarea
+                      name="txtareaVisit"
+                      id="txtareaVisit"
+                      cols="1"
+                      rows="2"
+                      class="form-control shadow-sm"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="col">
+                  <p>Were you able to find what you need?</p>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="foundYes"
+                        name="found"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="foundYes"
+                        >Yes</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="foundNo"
+                        name="found"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="foundNo"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <p>
+                      If you did not find what you need, please tell us what
+                      info. you were seeking?
+                    </p>
+                    <textarea
+                      name="txtareaFound"
+                      id="txtareaFound"
+                      cols="1"
+                      rows="2"
+                      class="form-control shadow-sm"
+                    ></textarea>
+                    <label for="txtareaFound"></label>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="form-row">
+                <div class="col">
+                  <p>How easy is it to find info. on the application?</p>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="veryEasy"
+                        name="easy"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="veryEasy"
+                        >Very Easy</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="easyEasy"
+                        name="easy"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="easyEasy"
+                        >Easy</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="average"
+                        name="easy"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="average"
+                        >Average</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="difficult"
+                        name="easy"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="difficult"
+                        >Difficult</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="difficultVery"
+                        name="easy"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="difficultVery"
+                        >Very Difficult</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <p>How easy is it to find info. on the application?</p>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="extremelyLikely"
+                        name="return"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="extremelyLikely"
+                        >Extremely Likely</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="veryLikely"
+                        name="return"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="veryLikely"
+                        >Very Likely</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="moderatelyLikely"
+                        name="return"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="moderatelyLikely"
+                        >Moderately Likely</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="slightlyLikely"
+                        name="return"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="slightlyLikely"
+                        >Slightly Likely</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="unlikelyReturn"
+                        name="return"
+                        value="customEx"
+                      />
+                      <label class="custom-control-label" for="unlikelyReturn"
+                        >Unlikely Return</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="form-row">
+                <p>Please provide any additional comments or suggestions.</p>
+                <textarea
+                  name="txtareaAddition"
+                  id="txtareaAddition"
+                  cols="1"
+                  rows="5"
+                  class="form-control shadow-sm"
+                  placeholder="(optional)"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info rounded-pill">
+              Completed
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger rounded-pill"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/jquery-3.5.1.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="Bootstrap/js/bootstrap.js"></script>
+</html>

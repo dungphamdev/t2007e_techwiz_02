@@ -1,0 +1,56 @@
+*{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin : 0 auto;
+    line-height: 1.1;
+}
+body{
+    background-color: #f7f7f7;
+    text-align: center;
+}
+.box_banner {
+    padding-top: 48px;
+    padding-bottom: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    height: auto;
+    box-shadow: #AAA;
+    border-radius: 4px;
+
+}
+
+
+
+
+.card hr{
+    margin: 0;
+    border: 1px solid #f7f7f7;
+}
+.btn-send {
+
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    width: 80%;
+    margin-left: 3px
+}
+
+.help-block.with-errors {
+    color: #ff5050;
+    margin-top: 5px
+}
+
+.card {
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+hr{
+    border: 1px solid #00ba51;
+}
+.total{
+
+   box-shadow:  0 -2px 6px 0 rgba(28,28,28,.06);
+}

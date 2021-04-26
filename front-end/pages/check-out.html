@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../slick-1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="../slick-1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="../css/check-out.css">
+    <title>Title</title>
+
+</head>
+<body>
+<header>
+    <div class="modal" id="cart">
+        <div class="modal-dialog w-50 mt-0" id="modal-dialog-1">
+            <div class="modal-content" id="modal-content-1">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-shopping-bag" aria-hidden="true"></i></h4>
+                    <button type="button" class="close"
+                            data-dismiss="modal">&times;
+                    </button>
+                </div>
+                <div class="modal-body"> Modal body..</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold text-white" href="#">LOGO</a>
+            <div class="navbar-nav ml-auto">
+                <div class="row">
+                    <div class="col-6 nav-item">
+                        <a class="nav-link font-weight-bold text-white" href="#">Login</a>
+                    </div>
+                    <div class="col-6 nav-item">
+                        <a class="nav-link font-weight-bold text-white" id="showCart" data-toggle="modal"
+                           data-target="#cart" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="background-color: white">
+
+        <div class="container">
+            <div class="box_banner ">
+                <p class=" text-left font-weight-bolder h1 pt-4">
+                    Final step - check out
+                </p>
+                <p class=" text-left font-weight-bold h4 pt-2 pb-2">
+                    Restaurant name
+                </p>
+            </div>
+        </div>
+    </div>
+
+</header>
+<section class="container">
+    <div class="card mt-2 mx-auto " style="box-shadow:  0 2px 10px 0 rgba(0,0,0,.1)">
+        <div class="card-body" style="margin: 0 !important;">
+            <p class=" text-left font-weight-bold h4 pt-2 ">
+                Delivered to
+            </p>
+        </div>
+        <hr>
+        <div class="card-body " style="margin: 0 !important;">
+            <form id="" role="form">
+                <div class="controls">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group"><p class="text-left" style="color: #9a9a9a">Address</p>
+                                <input type="text" name="Address"
+                                       class="form-control"
+                                       placeholder="Please enter your Address "
+                                       required="required" data-error="Address is required.">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group"><p class="text-left" style="color: #9a9a9a">Address details</p>
+                                <input type="text" name="Address details"
+                                       class="form-control"
+                                       placeholder="Please enter your Address details "
+                                       required="required" data-error="Address details is required.">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group"><p class="text-left" style="color: #9a9a9a">Notes for drivers</p>
+                                <input type="text" name="Notes for drivers"
+                                       class="form-control"
+                                       placeholder="Notes for drivers "
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="card mt-2 mx-auto " style="box-shadow:  0 2px 10px 0 rgba(0,0,0,.1)">
+        <div class="card-body" style="margin: 0 !important;">
+            <p class=" text-left font-weight-bold h4 pt-2 ">
+                Order summary
+            </p>
+        </div>
+        <hr>
+        <div class="card-body " style="margin: 0 !important;">
+            <div class="row">
+                <div class="col-1">
+                    <p class="font-weight-light text-center h5 pb-4 ">
+                        1
+                    </p>
+                </div>
+                <div class="col-8">
+                    <p class=" text-left font-weight-bold h5 pb-4  ">
+                        Mỳ Đặc Biệt + Sữa đậu nành
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p class="font-weight-light text-center h5 pb-4 ">
+                        74.000
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <p class=" text-left h5 pt-4 ">
+                        Total provisional calculation
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p class=" text-right h5 pt-4 ">
+                        74.000
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p class=" text-left h5 pb-2 ">
+                        Fees apply
+                    </p>
+
+                </div>
+                <div class="col-6">
+                    <p class=" text-right h5 pb-2 ">
+                        46.000
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card mt-2 mx-auto " style="box-shadow:  0 2px 10px 0 rgba(0,0,0,.1)">
+        <div class="card-body" style="margin: 0 !important;">
+            <p class=" text-left font-weight-bold h4 pt-2 ">
+                Payment details
+            </p>
+        </div>
+        <hr>
+        <div class="card-body " style="margin: 0 !important;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group"><p class="text-left" style="color: #9a9a9a">Payment methods</p>
+                        <p class="text-left h4 border p-3" style="border-radius: 4px"><i
+                                class="fas fa-money-bill-wave pr-4"></i>Cash</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card mt-2 mx-auto " style="box-shadow:  0 2px 10px 0 rgba(0,0,0,.1)">
+        <div class="card-body" style="margin: 0 !important;">
+            <p class=" text-left font-weight-bold h4 pt-2 ">
+                Shipping
+            </p>
+        </div>
+        <hr>
+        <div class="card-body " style="margin: 0 !important;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group"><p class="text-left" style="color: #9a9a9a">Shipping methods</p>
+                        <p class="text-left h4 border p-3" style="border-radius: 4px"><i
+                                class="fas fa-motorcycle pr-4"></i>FoodMate partner</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-4 pt-4  " style="padding-bottom: 200px">
+        <div class="col-6 text-right"><strong style="color: #9a9a9a">Copyright &#169 2021 FoodMate</strong></div>
+        <div class="col-6 text-left"><strong style="color: #9a9a9a">All right reserved</strong></div>
+    </div>
+
+</section>
+<footer class="position-fixed" style="bottom: 0;width: 100%">
+    <div style="background-color: white;" class="total,fixed-bottom" >
+
+        <div class="container">
+            <div class="row">
+                <div class=" col-md-6 col-sm-12">
+                    <p class=" text-left  h1 pt-4">
+                        Total
+                    </p>
+                    <p class=" text-left font-weight-bold h4 pt-2 pb-2">
+                        120.000 đ
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="row pt-4">
+                        <div class="col-6 pt-2">
+                        </div>
+                        <div class="col-6 pt-2 ">
+                            <input type="submit"
+                                   class="btn btn-success btn-send pt-2 btn-block font-weight-bold"
+                                   value="Order">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+<script src="../js/jquery-3.5.1.js"></script>
+<script src="../js/popper.min.js"></script>
+<script type="text/javascript" src="../slick-1.8.1/slick/slick.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="https://maps.google.com/maps/api/js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://kit.fontawesome.com/402feeb22c.js" crossorigin="anonymous"></script>
+<script src="check-out.js"></script>
+</body>
+</html>

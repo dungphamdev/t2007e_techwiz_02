@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" onchange="encodeImageFileAsURL(this)" />
+</body>
+
+<script>
+    const imageSrc = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QAqRXhpZgAASUkqAAgAAAABADEBAgAHAAAAGgAAAAAAAABHb29nbGUAAP/bAIQAAwICCAgICQgICAUFBQYHBwcHBgYHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHCgcHBwgJCQkHBwsNCggNBwgJCAEDBAQGBQYKBgYKCAcHCA0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI/8AAEQgB2AFiAwERAAIRAQMRAf/EAB0AAQACAwEBAQEAAAAAAAAAAAAEBQIDBgcIAQn/xABHEAABAgQEAwYDBAcGAwkAAAACAAEDBBESBSEiMgYxQgcTQVJicghRkhRhgqIJFSMzQ3GyFhdTc8LSY4HwNIORk6Gjs8Pi/8QAGwEBAAIDAQEAAAAAAAAAAAAAAAIDAQQFBgf/xAAtEQEAAgICAgIBAwQBBQEAAAAAAQIDEQQSBSETMUEUIjIjM1GBYQYkQnGRFv/aAAwDAQACEQMRAD8A/qmgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD8QEH6gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg/KrG2Pb8cmTbDEorNzdk2aft7fNNmn53zVpVq/JNp6ZOybYLVljZahtkjIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgrcX4ggQBc40WFABuqIVqM6eIcWfGzgkqbg8wMYmK39mhp4Vx5+k4gwycZOWKKA/xIiq23PheFcc/pC8WmSugEMtCuC2GKbZ+FyXE/wAb2NTNgtHKBZZqHqTa34Vhgnx543BfOL3riOoSTbPwqyT+NXGxmSjvMFEIto9CbSnDD2vs6/SXzMMSabgjM6dJCWu9NtW2J67wr+ksw6IwtHgxYRl5VLan4nu/BnxQYPPOIQpqD3hjdaT2ptj4nqUpPhEZiAgMX5OLqavSUjAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIvyiztjSj4i4zlZRrpiNCl29ZKvuuiNvmDtl/SByEjfDlG+3xh03i+i9O6+MO3wB2x/E5iOLTBHEiHBhEX7oSsAVnq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'
+
+    function encodeImageFileAsURL(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            console.log(reader.result)
+
+            data = { imageBase64: imageSrc };
+
+            fetch('http://localhost:4000/api/test/image', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(res => {
+                    console.log('Success:', res);
+                    let response = { ...res };
+                    if (response.statusCode === 200) {
+                        //add authen to store
+                        localStorage.setItem('customer', JSON.stringify(response.customer));
+                    } else {
+                        //remove authen in localstore
+                        localStorage.removeItem('customer');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+
+        }
+
+        reader.readAsDataURL(file);
+
+
+    }
+</script>
+
+</html>

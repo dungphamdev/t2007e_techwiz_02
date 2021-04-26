@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../bootstrap/css/bootstrap.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open Sans"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <style>
+      h2 {
+        font-family: "Open Sans";
+        font-size: 25px;
+      }
+
+      h2 span {
+        color: #0a5f69;
+      }
+
+      form {
+        font-family: "Roboto";
+        font-size: 16px;
+      }
+
+      .jumbotron {
+        background-color: white;
+      }
+
+      .container {
+        position: absolute;
+        padding: 0;
+        top: 25%;
+        left: 22%;
+        background-image: url(../pictures/restaurant-form-image.jpeg);
+        background-position: right;
+        background-size: 70%;
+       background-repeat: no-repeat
+      }
+
+      /*
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    form {
+      border: 3px solid #f1f1f1;
+    }
+
+     input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+    }
+
+    img.avatar {
+      width: 40%;
+      border-radius: 50%;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    } */
+
+      /* Change styles for span and cancel button on extra small screens */
+      /* @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+
+      .cancelbtn {
+        width: 100%;
+      }
+    } */
+    </style>
+  </head>
+
+  <body>
+    <div class="vh-100 bg-white">
+      <div class="container row bg-dark rounded shadow-lg">
+        <div class="jumbotron col-6 pt-4 mb-0">
+          <h2>Restaurant Form</h2>
+          <hr><br>
+          <form action="/action_page.php" method="post" id="branch-form">
+            <div class="form-group pt-2">
+              <!-- <label for="restaurantName"><b>Restaurant</b></label> -->
+              <input
+                type="text"
+                placeholder="Enter Restaurant name"
+                name="restaurantName"
+                class="form-control shadow"
+                required
+              />
+            </div>
+
+            <div class="form-group pt-2">
+              <!-- <label for="restaurantAddress"><b>Restaurant Address</b></label> -->
+              <input
+                type="text"
+                placeholder="Restaurant Address"
+                name="restaurantAddress"
+                class="form-control shadow"
+                required
+              />
+            </div>
+
+            <div class="form-group pt-2">
+              <!-- <label for="restaurantEmail"><b>Restaurant Email</b></label> -->
+              <input
+                type="text"
+                placeholder="Restaurant Email"
+                name="restaurantEmail"
+                class="form-control shadow"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col pt-2">
+                <!-- <label for="restaurantPhone"><b>Restaurant Phone</b></label> -->
+                <input
+                  type="text"
+                  placeholder="Restaurant Phone"
+                  name="restaurantPhone"
+                  class="form-control shadow"
+                  required
+                />
+              </div>
+  
+              <!-- <div class="form-group pt-2">
+                <label for="restaurantImage"><b>Restaurant Image</b></label>
+                <input id="restaurantImage" type="file" onchange="changeImage(this)" />
+              </div> -->
+              <div class="form-group col pt-2">
+                <div class="input-group shadow rounded">
+                  <div class="custom-file">
+                    <label class="custom-file-label" for="restaurantImage"
+                      >Choose file image</label
+                    >
+                    <input
+                      type="file"
+                      class="custom-file-input"
+                      id="restaurantImage"
+                      onchange="changeImage(this)"
+                    />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <hr><br>
+            <button
+              type="button"
+              class="btn btn-block btn-primary rounded text-white font-weight-light shadow"
+              onclick="createRestaurant()"
+            >
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="../js/jquery-3.5.1.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../Bootstrap/js/bootstrap.js"></script>
+  <script src="./restaurant.js"></script>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <style type="text/css">
+        .box_banner {
+            padding-top: 48px;
+            padding-bottom: 48px;
+            padding-left: 24px;
+            padding-right: 24px;
+
+            height: auto;
+            background-color: white;
+            box-shadow: #AAA;
+            border-radius: 4px;
+
+        }
+        .bg-cover {
+            min-height: 50vh;
+            background-size: cover !important;
+        }
+
+        #cart{
+
+        }
+
+    </style>
+</head>
+<body>
+<header>
+
+
+    <div style="background-image: url('rss/imgs/VN-new-2.jpg')"  class="page-holder bg-cover ">
+        <div class="modal" id="cart">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold text-white" href="#">LOGO</a>
+                <div class="navbar-nav ml-auto">
+                    <div class="row">
+                        <div class="col-6 nav-item">
+                            <a class="nav-link font-weight-bold text-white" href="#">Login</a>
+                        </div>
+                        <div class="col-6 nav-item">
+                            <a class="nav-link font-weight-bold text-white" id="showCart" data-toggle="modal" data-target="#cart" href="#">Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-5">
+            <div class="box_banner">
+                <p class=" text-dark font-weight-medium h1  text-uppercase text-decoration-none text-left "
+                   style="font-size: 1.4rem">
+                    Hello
+                </p>
+                <p class=" text-left text-dark font-weight-bold  h4 text-capitalize text-decoration-none"
+                   style="font-size: 2.5rem">
+                    Let's explore good food you love.
+                </p>
+                <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search" style="color: grey"></i></button>
+                        </div>
+                        <input type="search" placeholder="Search food or restaurant" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+<section class="main">
+    <div class="container bg-white">
+        <h2>FoodMate Popular in <span class="text-info">8A, Ton That Thuyet</span></h2>
+        <div class="your-class">
+            <div>your content</div>
+            <div>your content</div>
+            <div>your content</div>
+        </div>
+        <h2>There's something for everyone!</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-01.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-02.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-03.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-04.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-05.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-06.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-03.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 type-food">
+                <a href="#">
+                    <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                         src="./food-type-images/food-type-img-04.jpg" alt="Rice">
+                    <h6 class="mt-2 mb-3">Type of food</h6>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<footer></footer>
+<script src="js/jquery-3.5.1.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="Bootstrap/js/bootstrap.js"></script>
+<script src="https://kit.fontawesome.com/402feeb22c.js" crossorigin="anonymous"></script>
+</body>
+</html>

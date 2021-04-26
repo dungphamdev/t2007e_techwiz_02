@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+  <style>
+    h2 {
+      font-family: 'Open Sans';
+      font-size: 25px;
+    }
+    h2 span{
+      color: #0a5f69;
+    }
+    form {
+      font-family: 'Roboto';
+      font-size: 16px;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    .jumbotron{
+      background-color: white;
+    }
+    .container{
+      position: absolute;
+      padding: 0;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      background-image: url(./pictures/login-image.jpeg);
+      background-position: right;
+      background-size: 60%;
+      background-repeat: no-repeat
+    }
+    /* form {border: 3px solid #f1f1f1;} */
+
+    /* input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+*/
+    /* Change styles for span and cancel button on extra small screens */
+    /* @media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}  */
+  </style>
+</head>
+
+<body>
+  <div class="vh-100 bg-white">
+    <div class="container row bg-dark rounded shadow-lg">
+      <div class="jumbotron col-5 pt-4 mb-0">
+        <h2 class="py-3">Login <span class="font-weight-bold">FoodMate</span></h2>
+        <form action="/action_page.php" method="post" id="login-form">
+  
+          <div class="form-group pt-2">
+            <!-- <label for="username" class="font-weight-light"><b>Username</b></label> -->
+            <input type="text" placeholder="Enter Username" name="username" class="form-control shadow rounded-pill"
+              required>
+          </div>
+  
+          <div class="form-group pt-2">
+            <!-- <label for="password" class="font-weight-light"><b>Password</b></label> -->
+            <input type="password" placeholder="Enter Password" name="password" class="form-control shadow rounded-pill"
+              required>
+          </div>
+          <div class="form-group pt-2">
+            <button type="button" onclick="login()"
+              class="btn btn-block btn-primary rounded-pill text-white font-weight-light shadow">Login</button>
+          </div>
+          <!-- <label>
+              <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label> -->
+          <div class="row pt-2">
+            <div class="col">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="remember" name="remember" checked="checked">
+                <label class="custom-control-label" for="remember">Remember me</label>
+              </div>
+            </div>
+            <div class="col">
+              <!-- <button type="button" class="cancelbtn">Cancel</button> -->
+              <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+          </div>
+        </form>
+      </div>
+  
+    </div>
+
+  </div>
+</body>
+<script src="js/jquery-3.5.1.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="Bootstrap/js/bootstrap.js"></script>
+<script src="./login.js"></script>
+
+</html>

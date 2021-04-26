@@ -1,0 +1,95 @@
+a {
+    text-decoration: none;
+    color: #000;
+}
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+.box_banner {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    height: auto;
+    background-color: white;
+    box-shadow: #AAA;
+    border-radius: 4px;
+
+}
+
+.bg-cover {
+    min-height: 50vh;
+    background-size: cover !important;
+}
+
+#modal-dialog-1 {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+}
+
+#modal-content-1 {
+    height: 100%;
+}
+
+footer{
+    height: 400px;
+    background-color: green;
+}
+
+#slick-container .prev-arrow{
+    position: absolute;
+    top: 75%;
+    left: 7%;
+}
+
+#slick-container .next-arrow{
+    position: absolute;
+    top: 75%;
+    right: 7%;
+}
+
+@media only screen and (max-width: 576px){
+    .heading-responsive{
+        font-size: 20px;
+    }
+    #slick-container .prev-arrow{
+        visibility: hidden;
+    }
+    
+    #slick-container .next-arrow{
+        visibility: hidden;
+    }
+}
+
+@media only screen and (min-width: 576px){
+    .heading-responsive{
+        font-size: 25px;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .heading-responsive{
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 992px){
+    .heading-responsive{
+        font-size: 35px;
+    }
+    #slick-container .prev-arrow{
+        position: absolute;
+        top: 73%;
+        left: 15%;
+    }
+    
+    #slick-container .next-arrow{
+        position: absolute;
+        top: 73%;
+        right: 15%;
+    }
+}

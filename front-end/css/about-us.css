@@ -1,0 +1,267 @@
+*{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin : 0 auto;
+    line-height: 1.1;
+}
+body{
+    background-color: #FFFFFF;
+    text-align: center;
+
+}
+.box_banner {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    height: auto;
+    box-shadow: #AAA;
+    border-radius: 4px;
+
+}
+.text_banner {
+    position: absolute;
+    bottom: 10%;
+}
+
+.bg-cover {
+    min-height: 50vh;
+    background-size: cover !important;
+}
+
+
+/*----------FAQs-dung-co-dong-vao------------*/
+
+.wrapper {
+    max-width: 900px;
+    width: 100%;
+    margin: 10vh auto;
+    margin-top: 5vh;
+}
+
+
+input {
+    display: none;
+}
+
+label {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    border: 3px solid #3E474F;
+    user-select: none;
+}
+
+label div:first-child {
+    width: 100%;
+    line-height: 45px;
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+
+.cross{
+    margin-right:15px;
+    margin-top:3px;
+}
+
+.cross:before,.cross:after {
+    content: '';
+    border-top: 2px solid #3E474F;
+    width: 15px;
+    display: block;
+    margin-top: 18px;
+    transition: 0.3s;
+}
+
+.cross:after {
+    transform: rotate(90deg);
+    margin-top: -2px;
+}
+
+.content {
+    box-sizing: border-box;
+    font-size: 0.9em;
+    margin: 10px 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height, .5s;
+}
+
+input:checked ~ .content {
+    max-height: 400px;
+    transition: max-height, 1s;
+}
+
+input:checked ~ label .cross:before {
+    transform: rotate(180deg);
+}
+
+input:checked ~ label .cross:after {
+    transform: rotate(0deg);
+}
+
+.questions{
+    margin-top:20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height, .5s;
+}
+
+.questions label{
+    border:none;
+    box-shadow: none;
+    margin:0;
+}
+
+input:checked ~ .questions {
+    max-height: 400px;
+    border-bottom:2px solid #3E474F;
+    transition: 1s;
+}
+
+/*----------tool-tip------------*/
+
+.tip {
+    color: #f03768;
+    cursor: help;
+    position: relative;
+    overflow: visible;
+    font-family: monospace;
+    font-size: 1.3em;
+}
+
+.tip:before,
+.tip:after {
+    position: absolute;
+    opacity: 0;
+    z-index: -100;
+    transform: translateY(-30%);
+    transition: .4s;
+}
+
+.tip:before {
+    content: '';
+    border-style: solid;
+    border-width: 0.8em 0.5em 0 0.5em;
+    border-color: #3E474F transparent transparent transparent;
+    transform: translateY(-200%);
+    bottom:90%;
+    left:50%;
+}
+
+.tip:after {
+    content: attr(data-tip);
+    background: #3E474F;
+    color: white;
+    width: 150px;
+    padding: 10px;
+    font-size: 0.8em;
+    bottom: 150%;
+    left: -50%;
+}
+
+.tip:hover:before,
+.tip:hover:after {
+    opacity: 1;
+    z-index: 100;
+    transform: scaleY(1);
+}
+/*---------Contact------------*/
+.btn-send {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    width: 80%;
+    margin-left: 3px
+}
+
+.help-block.with-errors {
+    color: #ff5050;
+    margin-top: 5px
+}
+
+.card {
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+hr{
+    border: 1px solid #00ba51;
+}
+/*----Footer*/
+#footer1{
+    background-color: #EEEEEE;
+    height: 100%;
+
+}
+#footer_strong p{
+    font-weight: 650;
+    font-size: 21px;
+}
+.footer2{
+    background-color: #00ba51;
+}
+.logo-footer{
+    font-size: 45px ;
+    font-weight: 700;
+    color: white;
+
+    text-align: left;
+}
+.footer2 hr{
+
+    border: 1px solid hsla(0,0%,100%,.3);
+
+}
+.footer2 .col-md-4{
+    color:white;
+    font-weight: 650;
+}
+
+#followus1{
+    margin-left: -80px;
+}
+#followus2{
+    margin-left: -160px;
+}
+#followus3{
+    margin-left: -240px;
+}
+#followus1,#followus2,#followus3{
+    transition: transform .3s;
+    color: white;
+    font-size: 20px;
+}
+#followus1:hover,#followus3:hover,#followus2:hover{
+    -ms-transform: scale(2); /* IE 9 */
+    -webkit-transform: scale(2); /* Safari 3-8 */
+    transform: scale(2);
+    color: #3300CC;
+}
+#followus2:hover{
+    color: #FF3300;
+}
+#followus3:hover{
+    background-image:linear-gradient(to left, violet, orange);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.col-12 .ml-4{
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+
+}
+.form-row .col-md-4 a{
+    color: white;
+    text-decoration: none;
+}
+
+
