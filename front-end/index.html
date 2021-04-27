@@ -1,99 +1,385 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick.css" />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="./slick-1.8.1/slick/slick-theme.css" />
 
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
+    <link rel="stylesheet" href="./style.css">
+    <style type="text/css">
+    </style>
 </head>
+
 <body>
+    <header>
+        <div style="background-image: url('rss/imgs/VN-new-2.jpg')" class="page-holder bg-cover ">
+            <div class="modal" id="cart">
+                <div class="modal-dialog w-50 mt-0" id="modal-dialog-1">
+                    <div class="modal-content" id="modal-content-1">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fa fa-shopping-bag" aria-hidden="true"></i></h4> <button
+                                type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body"> Modal body.. </div>
+                        <div class="modal-footer"> <button type="button" class="btn btn-danger"
+                                data-dismiss="modal">Close</button> </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="container">
+                    <a class="navbar-brand font-weight-bold text-white" href="#">LOGO</a>
+                    <div class="navbar-nav ml-auto">
+                        <div class="row">
+                            <div class="col-6 nav-item">
+                                <a class="nav-link font-weight-bold text-white" href="#">Login</a>
+                            </div>
+                            <div class="col-6 nav-item">
+                                <a class="nav-link font-weight-bold text-white" id="showCart" data-toggle="modal"
+                                    data-target="#cart" href="#"><i class="fa fa-shopping-bag"
+                                        aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="container py-5">
+                <div class="box_banner">
+                    <p class=" text-dark font-weight-medium h1  text-uppercase text-decoration-none text-left "
+                        style="font-size: 1.4rem">
+                        Hello
+                    </p>
+                    <p class=" text-left text-dark font-weight-bold  h4 text-capitalize text-decoration-none"
+                        style="font-size: 2.5rem">
+                        Let's explore good food you love.
+                    </p>
+                    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
+                                        class="fa fa-search" style="color: grey"></i></button>
+                            </div>
+                            <input type="search" placeholder="Search food or restaurant"
+                                aria-describedby="button-addon1" class="form-control border-0 bg-light">
 
-<h2>Login Form</h2>
+                        </div>
+                    </div>
+                </div>
 
-<form action="/action_page.php" method="post">
-  <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-  </div>
-
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-        
-    <button type="button" onclick="myFunction()">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
-
+            </div>
+        </div>
+    </header>
+    <section class="main">
+        <div class="container bg-white">
+            <div class="heading-responsive font-weight-bold py-5">FoodMate Popular in <span class="text-info">8A, Ton
+                    That
+                    Thuyet</span></div>
+            <div id="slick-container">
+                <div class="prev-arrow">
+                    <span><i class="fas fa-chevron-left"></i></span>
+                </div>
+                <div class="responsive-carousel row">
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <a href="#">
+                                    <img class="img-fluid rounded" src="./food-type-images/food-type-img-01.jpg"
+                                        alt="food-type-img-01" style="height: auto; max-width: 100%;">
+                                    <h5 class="card-title">Cơm Thố Anh Nguyễn - Duy Tân</h5>
+                                    <p class="card-text text-secondary">
+                                        <span id="food-type">Rice</span>
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i><span
+                                                        id="rating">4.5</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span
+                                                        id="deliveryTime">18mins</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-bicycle" aria-hidden="true"></i><span
+                                                        id="distancce">2.3km</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <i class="fa fa-tag" aria-hidden="true"></i><span id="discount">Discount
+                                            tag</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <a href="#">
+                                    <img class="img-fluid rounded" src="./food-type-images/food-type-img-01.jpg"
+                                        alt="food-type-img-01" style="height: auto; max-width: 100%;">
+                                    <h5 class="card-title">Cơm Thố Anh Nguyễn - Duy Tân</h5>
+                                    <p class="card-text text-secondary">
+                                        <span id="food-type">Rice</span>
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i><span
+                                                        id="rating">4.5</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span
+                                                        id="deliveryTime">18mins</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-bicycle" aria-hidden="true"></i><span
+                                                        id="distancce">2.3km</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <i class="fa fa-tag" aria-hidden="true"></i><span id="discount">Discount
+                                            tag</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <a href="#">
+                                    <img class="img-fluid rounded" src="./food-type-images/food-type-img-01.jpg"
+                                        alt="food-type-img-01" style="height: auto; max-width: 100%;">
+                                    <h5 class="card-title">Cơm Thố Anh Nguyễn - Duy Tân</h5>
+                                    <p class="card-text text-secondary">
+                                        <span id="food-type">Rice</span>
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i><span
+                                                        id="rating">4.5</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span
+                                                        id="deliveryTime">18mins</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-bicycle" aria-hidden="true"></i><span
+                                                        id="distancce">2.3km</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <i class="fa fa-tag" aria-hidden="true"></i><span id="discount">Discount
+                                            tag</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <a href="#">
+                                    <img class="img-fluid rounded" src="./food-type-images/food-type-img-01.jpg"
+                                        alt="food-type-img-01" style="height: auto; max-width: 100%;">
+                                    <h5 class="card-title">Cơm Thố Anh Nguyễn - Duy Tân</h5>
+                                    <p class="card-text text-secondary">
+                                        <span id="food-type">Rice</span>
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i><span
+                                                        id="rating">4.5</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span
+                                                        id="deliveryTime">18mins</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-bicycle" aria-hidden="true"></i><span
+                                                        id="distancce">2.3km</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <i class="fa fa-tag" aria-hidden="true"></i><span id="discount">Discount
+                                            tag</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <a href="#">
+                                    <img class="img-fluid rounded" src="./food-type-images/food-type-img-01.jpg"
+                                        alt="food-type-img-01" style="height: auto; max-width: 100%;">
+                                    <h5 class="card-title">Cơm Thố Anh Nguyễn - Duy Tân</h5>
+                                    <p class="card-text text-secondary">
+                                        <span id="food-type">Rice</span>
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i><span
+                                                        id="rating">4.5</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span
+                                                        id="deliveryTime">18mins</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-bicycle" aria-hidden="true"></i><span
+                                                        id="distancce">2.3km</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <i class="fa fa-tag" aria-hidden="true"></i><span id="discount">Discount
+                                            tag</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <a href="#">
+                                    <img class="img-fluid rounded" src="./food-type-images/food-type-img-01.jpg"
+                                        alt="food-type-img-01" style="height: auto; max-width: 100%;">
+                                    <h5 class="card-title">Cơm Thố Anh Nguyễn - Duy Tân</h5>
+                                    <p class="card-text text-secondary">
+                                        <span id="food-type">Rice</span>
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i><span
+                                                        id="rating">4.5</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span
+                                                        id="deliveryTime">18mins</span>
+                                                </small>
+                                            </div>
+                                            <div class="col">
+                                                <small>
+                                                    <i class="fa fa-bicycle" aria-hidden="true"></i><span
+                                                        id="distancce">2.3km</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <i class="fa fa-tag" aria-hidden="true"></i><span id="discount">Discount
+                                            tag</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="next-arrow">
+                    <span><i class="fas fa-chevron-right"></i></span>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-outline-dark btn btn-block">See all promotions</button>
+            <div class="heading-responsive font-weight-bold py-5">There's something for everyone!</div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-05.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-06.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-03.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-04.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-01.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-02.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-03.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2">
+                    <a href="#">
+                        <img class="img-fluid rounded" style="height: auto; max-width: 100%;"
+                            src="./food-type-images/food-type-img-04.jpg" alt="Rice">
+                        <h6 class="mt-2 mb-3">Type of food</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+    </footer>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script type="text/javascript" src="./slick-1.8.1/slick/slick.min.js"></script>
+    <script src="Bootstrap/js/bootstrap.js"></script>
+    <script src="https://kit.fontawesome.com/402feeb22c.js" crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
 </body>
-<script src="./main.js"></script>
+
 </html>
