@@ -1,3 +1,14 @@
+*{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+   
+}
+body{
+    background-color: #FFFFFF;
+    text-align: center;
+
+}
 a {
     text-decoration: none;
     color: #000;
@@ -92,4 +103,172 @@ footer{
         top: 73%;
         right: 15%;
     }
+}
+
+#footer1{
+    background-color: #EEEEEE;
+    height: 100%;
+    
+}
+/* #footer1>.container{
+  margin : 0 auto;
+} */
+/* #footer_strong{
+  margin : 0 auto;
+} */
+#footer_strong p{
+    font-weight: 650;
+    font-size: 21px;
+}
+.footer2{
+    background-color:#5BBD2B;
+}
+.logo-footer{
+    font-size: 45px ;
+    font-weight: 700;
+    color: white;
+    
+    
+}
+.footer2 hr{
+    
+    background-color: #98FB98 ;
+    width: 80%;
+
+}
+.footer2 .col-md-4{
+    color:white;
+    font-weight: 650;
+}
+
+#followus1{
+    margin-left: 28px;
+}
+#followus2{
+    margin-left: 28px;
+}
+#followus3{
+    margin-left: 28px;
+} 
+#followus1,#followus2,#followus3{
+	transition: transform .3s;
+	color: white;
+    font-size: 20px;
+}
+#followus1:hover,#followus3:hover,#followus2:hover{
+	-ms-transform: scale(2); /* IE 9 */
+  -webkit-transform: scale(2); /* Safari 3-8 */
+  transform: scale(2); 
+  color: #3300CC;
+}
+#followus2:hover{
+	color: #FF3300;
+}
+#followus3:hover{
+	background-image:linear-gradient(to left, violet, orange);
+	-webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+         color: transparent;
+}
+.col-12 .ml-4{
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    
+}
+.form-row .col-md-4 a{
+    color: white;
+    text-decoration: none;
+    position: relative;
+    z-index: 3;
+    
+}
+.col-md-5 p span{
+    font-weight: 650;
+    color: #555555;
+}
+.foodmate{
+    font-size: 23px;
+    font-weight: 700;
+    font-style: italic;
+    color: white;
+    }
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,700,900,400italic,700italic,900italic);
+    
+.foodmate {
+    animation: text-shadow 2s ease-in-out infinite;
+    
+    color: white
+    }
+    
+    .foodmate:hover {
+    animation-play-state: paused;
+    
+    
+    }
+    
+    @keyframes text-shadow {
+    0% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #0c2ffb, 
+            0 0 0 #2cfcfd, 
+            0 0 0 #fb203b, 
+            0 0 0 #fefc4b;
+    }
+    
+    20% {  
+        transform: translateY(-1em);
+        text-shadow: 
+            0 0.125em 0 #0c2ffb, 
+            0 0.25em 0 #2cfcfd, 
+            0 -0.125em 0 #fb203b, 
+            0 -0.25em 0 #fefc4b;
+    }
+    
+    40% {  
+        transform: translateY(0.5em);
+        text-shadow: 
+            0 -0.0625em 0 #0c2ffb, 
+            0 -0.125em 0 #2cfcfd, 
+            0 0.0625em 0 #fb203b, 
+            0 0.125em 0 #fefc4b;
+    }
+    
+    60% {
+        transform: translateY(-0.25em);
+        text-shadow: 
+            0 0.03125em 0 #0c2ffb, 
+            0 0.0625em 0 #2cfcfd, 
+            0 -0.03125em 0 #fb203b, 
+            0 -0.0625em 0 #fefc4b;
+    }
+    
+    80% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #0c2ffb, 
+            0 0 0 #2cfcfd, 
+            0 0 0 #fb203b, 
+            0 0 0 #fefc4b;
+    }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+    }
+    .card:hover{
+box-shadow: 0px 5px 7px rgba(0,0,0,0.4);
+    border: 2px solid #5BBD2B;
+}
+.img-fluid{
+    width: 235px;
+    margin-left: 10px;
+    margin-top: 3px;
+   
+    border-radius: 15px;
 }
