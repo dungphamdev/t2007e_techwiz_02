@@ -114,38 +114,8 @@ function deleteRecord(restaurantId) {
             console.error("Error:", error);
           });
       }, 1000);
-      return;
     }
   });
-
-  // if (confirm("Ban chac chan muon xoa hay khong?")){
-  //   fetch("http://localhost:4000/api/restaurant/delete", {
-  //     method: "POST", // or 'PUT'
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       console.log("Success:", res);
-  //       let response = { ...res };
-  //       if (response.statusCode === 200) {
-  //         // thoong bao thanh cong
-  //         swal("The restaurant been deleted!", {
-  //           icon: "success",
-  //           buttons: false,
-  //           timer: 1500,
-  //         });
-  //         getList();
-  //       } else {
-  //         // thong bao loi
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //     });
-  // }
 }
 
 async function createRestaurant() {
@@ -208,6 +178,7 @@ async function createRestaurant() {
           });
           getList();
         } else {
+            location.reload();
           // thong bao loi
         }
       })
@@ -256,11 +227,6 @@ input.onchange = function () {
 
     console.log("b64:", b64);
 
-    // let b64ContentType = reader.result.match(/^data:.+;base64,/);
-    // console.log('b64ContentType', b64ContentType)
-
-    // contentType = b64ContentType[0]['0'];
-    // console.log('contentType: ', contentType)
     let listString = reader.result.split(",");
 
     contentType = listString[0];

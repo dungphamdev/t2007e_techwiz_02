@@ -1,8 +1,13 @@
-let base64imageValue = "";
 let contentType = "";
 let listCategories = [];
 
+
 $(function () {
+    //get list restaurants;
+    getList();
+  });
+
+function getList () {
     //get list restaurants;
     data = {};
     fetch("http://localhost:4000/api/category/list", {
@@ -15,30 +20,15 @@ $(function () {
         .then((response) => response.json())
         .then((res) => {
             listCategories = res.list ?? [];
-            // //generate DOM
-            // let html = '';
-            // listRestaurants.forEach(e => {
-            //     html += `<img src=${e.imageSrc} alt=${e.imageName}" width="500" height="600">`
-            // });
-            // $("#test-list-restaurant").append(html);
+
             console.log(listCategories);
-            // let tbody = $("#tableBody")
-            // let tr = $("<tr>")
-            // listRestaurants.forEach(e => {
-            //     let td = $("<td>")
-            //     td.append(e.restaurantId)
-            //     td.append(e.restaurantName)
-            //     td.append(e.restaurantAddress)
-            //     tr.append()
-            // });
-            // tbody.append(tr)
 
             let html = "";
 
             listCategories.forEach((e, i) => {
                 html += `
                 <tr>
-              <td>${i++}</td>
+              <td>${++i}</td>
               <td>${e.categoryName}</td>
               <td>
                 <div class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modalAddRestaurant" onclick="editRecord('${
@@ -51,14 +41,15 @@ $(function () {
             </tr>
                 `;
             });
-            $("#tableBody").append(html);
+            $("#tableBody").html(html);
         })
         .catch((error) => {
             console.error("Error:", error);
         });
-});
+};
 
 $("#openModalBtn").click(() => {
+    $("#id").val(0);
     $("#branch-form").trigger("reset");
     $("#oldImg").hide()
 })
@@ -70,11 +61,7 @@ function editRecord(categoryId) {
 
     $("form #id").val(categoryId);
 
-    // const formData = new FormData(document.getElementById('branch-form'));
     $(" #categoryName").val(restaurant.categoryName);
-    // console.log(restaurant);
-
-
 
     $("#createBtn").html("Save");
 }
@@ -86,8 +73,21 @@ function deleteRecord(categoryId) {
 
     console.log(data)
 
-    if (confirm("Ban chac chan muon xoa hay khong?")){
-        fetch("http://localhost:4000/api/category/delete", {
+    swal({
+        title: "Are you sure?",
+        text: "This category will not be recovered!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal("This category has been deleted!", {
+            icon: "success",
+            buttons: false,
+            timer: 1500,
+          });
+          setTimeout(() => {
+            fetch("http://localhost:4000/api/category/delete", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -99,8 +99,7 @@ function deleteRecord(categoryId) {
                 console.log("Success:", res);
                 let response = { ...res };
                 if (response.statusCode === 200) {
-                    // thoong bao thanh cong
-
+                    getList()
                 } else {
                     // thong bao loi
                 }
@@ -108,39 +107,29 @@ function deleteRecord(categoryId) {
             .catch((error) => {
                 console.error("Error:", error);
             });
-    }
-}
-async function createRestaurant() {
-    let restaurantModel = {
-        categoryName: "",
 
-        longitude: 0,
-        latitude: 0,
-        base64Value: base64imageValue,
-        imageName: "",
-        contentType: contentType,
+          }, 1000);
+        }
+      });
+    }
+
+async function createRestaurant() {
+    let categoryModal = {
+        categoryName: "",
     };
 
-    let fileInput = document.getElementById("restaurantImage");
-    if (fileInput) {
-        if (fileInput.files.length != 0) {
-            restaurantModel.imageName = fileInput.files[0].name;
-        }
-    }
     const formData = new FormData(document.getElementById("branch-form"));
-    let restaurant_ID = 0;
+    let category_ID = 0;
     for (var pair of formData.entries()) {
-        if (pair[0] == "categoryName") restaurantModel.categoryName = pair[1];
+        if (pair[0] == "categoryName") categoryModal.categoryName = pair[1];
 
-        if (pair[0] == "id") restaurant_ID = pair[1];
+        if (pair[0] == "id") category_ID = pair[1];
     }
 
+    console.log('category_ID:',category_ID)
 
-    console.log('restaurant_ID:',restaurant_ID)
-
-
-    if (restaurant_ID == 0) {
-        data = { ...restaurantModel };
+    if (category_ID == 0) {
+        data = { ...categoryModal };
         $("#createBtn").html("Save");
 
         fetch("http://localhost:4000/api/category/create", {
@@ -155,18 +144,22 @@ async function createRestaurant() {
                 console.log("Success:", res);
                 let response = { ...res };
                 if (response.statusCode === 200) {
-
-                    // thoong bao thanh cong
+                    swal("The category has been ADDED!", {
+                        icon: "success",
+                        buttons: false,
+                        timer: 1500,
+                      });
+                      getList();
                 } else {
-                    // thong bao loi
+                    location.reload();
                 }
             })
             .catch((error) => {
                 console.error("Error:", error);
             });
     } else {
-        restaurantModel.categoryId = Number(restaurant_ID);
-        data = { ...restaurantModel };
+        categoryModal.categoryId = Number(category_ID);
+        data = { ...categoryModal };
         console.log(data)
         fetch("http://localhost:4000/api/category/update", {
             method: "POST", // or 'PUT'
@@ -180,9 +173,14 @@ async function createRestaurant() {
                 console.log("Success:", res);
                 let response = { ...res };
                 if (response.statusCode === 200) {
-                    $("#id").val(0);
-                    // thong bao thanh cong
-                    location.reload();
+                    swal("The restaurant has been SAVED!", {
+                        icon: "success",
+                        buttons: false,
+                        timer: 1500,
+                      });
+                      setTimeout(()=> {
+                        location.reload();
+                      }, 1300)
                 } else {
                 }
             })
@@ -191,31 +189,3 @@ async function createRestaurant() {
             });
     }
 }
-var input = document.querySelector("input[type=file]");
-input.onchange = function () {
-    var file = input.files[0],
-        reader = new FileReader();
-    reader.onloadend = function () {
-        var b64 = reader.result.replace(/^data:.+;base64,/, "");
-        base64imageValue = b64;
-
-        console.log("b64:", b64);
-
-        // let b64ContentType = reader.result.match(/^data:.+;base64,/);
-        // console.log('b64ContentType', b64ContentType)
-
-        // contentType = b64ContentType[0]['0'];
-        // console.log('contentType: ', contentType)
-        let listString = reader.result.split(",");
-
-        contentType = listString[0];
-    };
-
-    reader.readAsDataURL(file);
-};
-
-$("#restaurantImage").change(() => {
-    let path = $("#restaurantImage").val();
-    let fileName = path.split("\\").pop();
-    $(".custom-file label").text(fileName);
-});
