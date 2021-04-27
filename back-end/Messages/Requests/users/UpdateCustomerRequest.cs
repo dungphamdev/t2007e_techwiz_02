@@ -2,7 +2,7 @@
 {
     public class UpdateCustomerRequest
     {
-        public Update CustomerModel customer { get; set; }
+        public UpdateCustomerModel customer { get; set; }
 
         public class UpdateCustomerModel
         {
