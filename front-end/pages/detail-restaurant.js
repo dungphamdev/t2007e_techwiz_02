@@ -179,8 +179,12 @@ function showModalOrder(id)
 </div>`;
   $('#infoitem').html(html); 
 }
-
+let arrObj = [];
 $(function () {
+  loaditemfromCart();
+})
+function loaditemfromCart()
+{
   let cartclone = JSON.parse(localStorage.getItem('currentCart'));
   let data = {
     "listItemId": [...cartclone]
@@ -203,8 +207,19 @@ $(function () {
       let html = '';
       let parseResult = JSON.parse(result).listItem;
       let money = 0;
+     
+
       for(let i = 0; i<parseResult.length;i++)
       {
+        let objecttest = {
+          'itemId' : '',
+          'itemPrice' : '',
+          'itemQty' : 1,
+        };
+        objecttest.itemId = parseResult[i].itemId;
+        objecttest.itemPrice = parseResult[i].itemPrice;
+
+        arrObj.push(objecttest);
         money += Number(parseResult[i].itemPrice);
         html += `              
         <div class="row productInBasket py-3 border-bottom">
@@ -247,20 +262,27 @@ $(function () {
             </div>
           </div>
         </div>
+        <button class="btn btn-danger" onclick="removeItemintheCart('${parseResult[i].itemId}')">x</button>
       </div>
       `;
       }
       $('#money').html('$'+money);
       // generateTotalText();
-
+      
       $('#mainCart').html(html);
       
-      $(".productInBasket").each(function(){
+      $(".productInBasket").each(function(e){
+        console.log(arrObj[e])
         $(this).find(".decreaseBtn-2").click(function(){
        
             let quantity = $(this).parent().find(".quantityInBasket").val();
             if (quantity > 1) {
+                
                 $(this).parent().find(".quantityInBasket").val(quantity - 1);
+                arrObj[Number(e)].itemQty = Number(quantity) -1;
+                console.log(arrObj)
+                money -= arrObj[Number(e)].itemPrice;
+                $('#money').html('$'+money);
             }
             let Money = Number($('#money').text().replace('$',''));
             // generateTotalText();
@@ -269,19 +291,47 @@ $(function () {
           let Money = Number($('#money').text().replace('$',''));
             let quantity = $(this).parent().find(".quantityInBasket").val();
             $(this).parent().find(".quantityInBasket").val(parseInt(quantity) + 1);
+            arrObj[Number(e)].itemQty = Number(quantity) +1;
+            money += arrObj[Number(e)].itemPrice;
+            $('#money').html('$'+money);
             // generateTotalText();
         });
         
       });
+      
     })
     .catch((error) => {
         //alert('Too many item in Cart');
         console.error('Error:', error);
     });
   }
-})
+  else
+  {
+    $('#mainCart').html('');
+    $('#money').html('');
+  }
+}
+function removeItemintheCart(itemId)
+{
+  let cartclone = JSON.parse(localStorage.getItem('currentCart'));
+  
+  for(var i=0;i<cartclone.length;i++)
+  {
+    if(Number(itemId) == Number(cartclone[i]))
+    {
+      cartclone.splice(i,1);
+      break;
+    }
+  }
+  console.log(cartclone)
+  localStorage.removeItem('currentCart');
+  localStorage.setItem('currentCart',JSON.stringify(cartclone));
+  loaditemfromCart();
+}
+
 function addtoCart()
 {
+ 
   if(localStorage.getItem('customer') == null)
   {
     alert('Please login!');
@@ -315,6 +365,7 @@ function addtoCart()
 
 function openCart()
 {
+  loaditemfromCart();
   $('#mainCart').show();
  
 }
@@ -327,7 +378,7 @@ function sendOrder()
     return;
   }
   //aaaaaaaaaaaaaaaaaaaaaaaaaaa
-  
+    let sendMoney = Number($('#money').text().replace('$',''));
     var productArr = [];
     $(".productInBasket").each(function(){
       let ItemQty = $(this).find(".quantityInBasket").val();
@@ -343,11 +394,12 @@ function sendOrder()
   let customerId = customer.customerId;
   let restaurant = JSON.parse(localStorage.getItem('currentRestaurant'));
   let currentrestaurantId = restaurant.currentRestaurantId;
+  console.log(sendMoney)
   model = {
     "billingItem": {
       "customerId": Number(customerId),
       "restaurantId": Number(currentrestaurantId),
-      "billAmout": Number(0),
+      "billAmout": Number(sendMoney),
       "orderDate": "2021-04-27T08:21:42.975Z",
       "orderDetail": productArr
     }
