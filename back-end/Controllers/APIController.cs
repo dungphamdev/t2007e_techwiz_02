@@ -74,7 +74,10 @@ namespace WebApi.Controllers
                         CustomerContactPhone = request.customer?.CustomerContactPhone ?? "",
                         Username = request.customer?.Username ?? "",
                         Password = request.customer.Password ?? "",
-                        CustomerAddress = request.customer.CustomerAddress ?? ""
+                        CustomerAddress = request.customer.CustomerAddress ?? "",
+                        Active = true,
+                        IsStaff = request.customer.IsStaff,
+                        RestaurantId = request.customer.RestaurantId
                     };
                     context.Customers.Add(newCustomer);
                     context.SaveChanges();
@@ -114,6 +117,8 @@ namespace WebApi.Controllers
                     customer.CustomerEmailId = request.customer?.CustomerEmailId ?? "";
                     customer.CustomerContactPhone = request.customer?.CustomerContactPhone ?? "";
                     customer.CustomerAddress = request.customer.CustomerAddress ?? "";
+                    customer.IsStaff = request.customer.IsStaff;
+                    customer.RestaurantId = request.customer?.RestaurantId;
                     context.Customers.Update(customer);
                     context.SaveChanges();
                     context.Dispose();
@@ -174,6 +179,29 @@ namespace WebApi.Controllers
             }
         }
 
+        [Route("customer/list")]
+        [HttpPost]
+        public GetListCustomerResponse GetAlUsers()
+        {
+            try
+            {
+                var listCustomer = context.Customers.Where(w => w.Active == true).ToList() ?? new List<Customer>();
+                return new GetListCustomerResponse
+                {
+                    ListCustomer = listCustomer,
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception e)
+            {
+                return new GetListCustomerResponse
+                {
+                    ListCustomer = null,
+                    StatusCode = (int)HttpStatusCode.BadRequest
+                };
+            }
+        }
+
         //[Route("customer/orders")]
         //[HttpPost]
         //public CustomerOrderResponse CustomerOrder([FromBody] CustomerOrderRequest request)
@@ -197,7 +225,7 @@ namespace WebApi.Controllers
         //                OrderItemName = request.OrderItemName,
         //                OrderItemQty = request.OrderItemQty 
         //            };
-                    
+
         //            context.OrderDetails.Add(oderDetail);
         //            context.SaveChanges();
         //            context.Dispose();
