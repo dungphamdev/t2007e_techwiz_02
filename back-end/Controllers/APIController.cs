@@ -64,32 +64,53 @@ namespace WebApi.Controllers
         {
             try
             {
-                string Username = context.Customers.FirstOrDefault(f => f.Username == request.customer.Username)?.Username;                                           
-                if (Username == null)
+                //string Username = context.Customers.FirstOrDefault(f => f.Username == request.customer.Username)?.Username;                                           
+                //if (Username == null)
+                //{
+                //    var newCustomer = new Customer
+                //    {
+                //        CustomerName = request.customer?.CustomerName ?? "",
+                //        CustomerEmailId = request.customer?.CustomerEmailId ?? "",
+                //        CustomerContactPhone = request.customer?.CustomerContactPhone ?? "",
+                //        Username = request.customer?.Username ?? "",
+                //        Password = request.customer.Password ?? "",
+                //        CustomerAddress = request.customer.CustomerAddress ?? "",
+                //        Active = true,
+                //        IsStaff = request.customer.IsStaff,
+                //        RestaurantId = request.customer.RestaurantId
+                //    };
+                //    context.Customers.Add(newCustomer);
+                //    context.SaveChanges();
+                //    context.Dispose();
+                //}
+                //else
+                //{
+                //    return new CreateCustomerResponse
+                //    {
+                //        StatusCode = (int)HttpStatusCode.BadRequest
+                //    };
+                //}                
+                //return new CreateCustomerResponse
+                //{
+                //    StatusCode = (int)HttpStatusCode.OK
+                //};
+
+                var newCustomer = new Customer
                 {
-                    var newCustomer = new Customer
-                    {
-                        CustomerName = request.customer?.CustomerName ?? "",
-                        CustomerEmailId = request.customer?.CustomerEmailId ?? "",
-                        CustomerContactPhone = request.customer?.CustomerContactPhone ?? "",
-                        Username = request.customer?.Username ?? "",
-                        Password = request.customer.Password ?? "",
-                        CustomerAddress = request.customer.CustomerAddress ?? "",
-                        Active = true,
-                        IsStaff = request.customer.IsStaff,
-                        RestaurantId = request.customer.RestaurantId
-                    };
-                    context.Customers.Add(newCustomer);
-                    context.SaveChanges();
-                    context.Dispose();
-                }
-                else
-                {
-                    return new CreateCustomerResponse
-                    {
-                        StatusCode = (int)HttpStatusCode.BadRequest
-                    };
-                }                
+                    CustomerName = request.customer?.CustomerName ?? "",
+                    CustomerEmailId = request.customer?.CustomerEmailId ?? "",
+                    CustomerContactPhone = request.customer?.CustomerContactPhone ?? "",
+                    Username = request.customer?.Username ?? "",
+                    Password = request.customer.Password ?? "",
+                    CustomerAddress = request.customer.CustomerAddress ?? "",
+                    Active = true,
+                    IsStaff = request.customer.IsStaff,
+                    RestaurantId = request.customer.RestaurantId
+                };
+                context.Customers.Add(newCustomer);
+                context.SaveChanges();
+                context.Dispose();
+
                 return new CreateCustomerResponse
                 {
                     StatusCode = (int)HttpStatusCode.OK
@@ -117,6 +138,8 @@ namespace WebApi.Controllers
                     customer.CustomerEmailId = request.customer?.CustomerEmailId ?? "";
                     customer.CustomerContactPhone = request.customer?.CustomerContactPhone ?? "";
                     customer.CustomerAddress = request.customer.CustomerAddress ?? "";
+                    customer.Username = request.customer?.Username ?? "";
+                    customer.Password = request.customer.Password ?? "";
                     customer.IsStaff = request.customer.IsStaff;
                     customer.RestaurantId = request.customer?.RestaurantId;
                     context.Customers.Update(customer);
@@ -150,7 +173,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                var customer = context.Customers.FirstOrDefault(f => f.CustomerId == request.customer.CustomerId && f.Active == true);
+                var customer = context.Customers.FirstOrDefault(f => f.CustomerId == request.CustomerId);
                 if (customer != null)
                 {
                     customer.Active = false;

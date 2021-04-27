@@ -6,7 +6,7 @@ $(function () {
   //get list restaurants;
   getList();
 });
-function getList(){
+function getList() {
   data = {};
   fetch("http://localhost:4000/api/restaurant/list", {
     method: "POST",
@@ -18,23 +18,6 @@ function getList(){
     .then((response) => response.json())
     .then((res) => {
       listRestaurants = res.list ?? [];
-      // //generate DOM
-      // let html = '';
-      // listRestaurants.forEach(e => {
-      //     html += `<img src=${e.imageSrc} alt=${e.imageName}" width="500" height="600">`
-      // });
-      // $("#test-list-restaurant").append(html);
-      console.log(listRestaurants);
-      // let tbody = $("#tableBody")
-      // let tr = $("<tr>")
-      // listRestaurants.forEach(e => {
-      //     let td = $("<td>")
-      //     td.append(e.restaurantId)
-      //     td.append(e.restaurantName)
-      //     td.append(e.restaurantAddress)
-      //     tr.append()
-      // });
-      // tbody.append(tr)
 
       let html = "";
 
@@ -47,12 +30,10 @@ function getList(){
               <td>${e.restaurantEmail}</td>
               <td>${e.restaurantPhone}</td>
               <td>
-                <div class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modalAddRestaurant" onclick="editRecord('${
-                  e.restaurantId
-                }')">Edit</div>
-                <div class="btn btn-sm btn-danger" onclick="deleteRecord('${
-                  e.restaurantId
-                }')">Delete</div>
+                <div class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modalRestaurant" onclick="editRecord('${e.restaurantId
+          }')">Edit</div>
+                <div class="btn btn-sm btn-danger" onclick="deleteRecord('${e.restaurantId
+          }')">Delete</div>
               </td>
             </tr>
                 `;
@@ -81,7 +62,6 @@ function editRecord(restaurantId) {
   $("#restaurantAddress").val(restaurant.restaurantAddress);
   $("#restaurantEmail").val(restaurant.restaurantEmail);
   $("#restaurantPhone").val(restaurant.restaurantPhone);
-  // console.log(restaurant);
 
   let html = "";
   html += `<img src=${restaurant.imageSrc} alt=${restaurant.imageName}">`;
@@ -90,7 +70,7 @@ function editRecord(restaurantId) {
 
   $("#createBtn").html("Save");
 }
-  
+
 function deleteRecord(restaurantId) {
   data = {
     'restaurantId': Number(restaurantId)
@@ -98,29 +78,74 @@ function deleteRecord(restaurantId) {
 
   console.log(data)
 
-  if (confirm("Ban chac chan muon xoa hay khong?")){
-    fetch("http://localhost:4000/api/restaurant/delete", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log("Success:", res);
-        let response = { ...res };
-        if (response.statusCode === 200) {
-          // thoong bao thanh cong
-          getList();
-        } else {
-          // thong bao loi
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+  swal({
+    title: "Are you sure?",
+    text: "This restaurant will not be recovered!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      swal("This restaurant has been deleted!", {
+        icon: "success",
+        buttons: false,
+        timer: 1500,
       });
-  }
+      setTimeout(() => {
+        fetch("http://localhost:4000/api/restaurant/delete", {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((res) => {
+            console.log("Success:", res);
+            let response = { ...res };
+            if (response.statusCode === 200) {
+              // thoong bao thanh cong
+              getList();
+            } else {
+              // thong bao loi
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }, 1000);
+      return;
+    }
+  });
+
+  // if (confirm("Ban chac chan muon xoa hay khong?")){
+  //   fetch("http://localhost:4000/api/restaurant/delete", {
+  //     method: "POST", // or 'PUT'
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((res) => {
+  //       console.log("Success:", res);
+  //       let response = { ...res };
+  //       if (response.statusCode === 200) {
+  //         // thoong bao thanh cong
+  //         swal("The restaurant been deleted!", {
+  //           icon: "success",
+  //           buttons: false,
+  //           timer: 1500,
+  //         });
+  //         getList();
+  //       } else {
+  //         // thong bao loi
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // }
 }
 
 async function createRestaurant() {
@@ -157,7 +182,7 @@ async function createRestaurant() {
     if (pair[0] == "id") restaurant_ID = pair[1];
   }
 
-  console.log('restaurant_ID:',restaurant_ID)
+  console.log('restaurant_ID:', restaurant_ID)
 
 
   if (restaurant_ID == 0) {
@@ -176,7 +201,11 @@ async function createRestaurant() {
         console.log("Success:", res);
         let response = { ...res };
         if (response.statusCode === 200) {
-          // thoong bao thanh cong
+          swal("The restaurant has been ADDED!", {
+            icon: "success",
+            buttons: false,
+            timer: 1500,
+          });
           getList();
         } else {
           // thong bao loi
@@ -201,8 +230,14 @@ async function createRestaurant() {
         console.log("Success:", res);
         let response = { ...res };
         if (response.statusCode === 200) {
-          // thong bao thanh cong
-          location.reload(); 
+          swal("The restaurant has been SAVED!", {
+            icon: "success",
+            buttons: false,
+            timer: 1500,
+          });
+          setTimeout(()=> {
+            location.reload();
+          }, 1300)
         } else {
         }
       })

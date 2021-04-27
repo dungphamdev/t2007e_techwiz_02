@@ -2,7 +2,7 @@
 {
     public class UpdateCustomerRequest
     {
-        public UpdateCustomerModel customer { get; set; }
+        public Update CustomerModel customer { get; set; }
 
         public class UpdateCustomerModel
         {
@@ -11,7 +11,8 @@
             public string CustomerEmailId { get; set; }
             public string CustomerContactPhone { get; set; }
             public string CustomerAddress { get; set; }
-
+            public string Username { get; set; }
+            public string Password { get; set; }
             public bool IsStaff { get; set; }
             public int? RestaurantId { get; set; }
         }

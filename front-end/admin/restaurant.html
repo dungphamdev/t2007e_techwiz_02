@@ -18,10 +18,8 @@
     />
     <link href="dist/css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
-
-
-
       h2 {
         font-family: "Open Sans";
         font-size: 25px;
@@ -79,10 +77,10 @@
             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
               <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" href="category.html">Manage Category</a>
-                <a class="nav-link" href="#">Manage Staff</a>
+                <a class="nav-link" href="staff.html">Manage Staff</a>
                 <a class="nav-link" href="restaurant.html">Manage Restaurants</a>
-                <a class="nav-link" href="#">Manage Foods</a>
-                <a class="nav-link" href="#">Manage Orders</a>
+                <a class="nav-link" href="#foods.html">Manage Foods</a>
+                <a class="nav-link" href="#orders.html">Manage Orders</a>
               </nav>
             </div>
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -114,7 +112,7 @@
           <h2 class="mr-auto">Manage Restaurant</h2>
           <div class="ml-auto">
             <!-- <div class="btn btn-sm btn-danger" onclick="deleteCheckedRecord">Delete</div> -->
-            <div id="openModalBtn" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalAddRestaurant">Add New Restaurant</div>
+            <div id="openModalBtn" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalRestaurant">Add New Restaurant</div>
           </div>
         </div>
 
@@ -130,10 +128,9 @@
           <tbody id="tableBody">
           </tbody>
         </table>
-
       </div>
 
-      <div class="modal fade" id="modalAddRestaurant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="modalRestaurant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
