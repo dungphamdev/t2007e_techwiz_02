@@ -63,7 +63,7 @@ $(function () {
             let autoCompleted=[];
             listRestaurants.forEach(e => {
                 autoCompleted.push(e.restaurantName)
-                restaurants += `<div class="col-md-3 col-sm-6 mt-5">`
+                restaurants += `<div class="col-md-3 col-sm-6 mt-5" onclick="restaurantDetail('${e.restaurantId}')">`
                 restaurants += `<img src=${e.imageSrc} alt=${e.imageName}" width="220px" height="auto" alt=" ">`
                 restaurants += `<br/><br/>`
                 restaurants += `<strong>${e.restaurantName}</strong>`
@@ -81,3 +81,17 @@ $(function () {
             console.error('Error:', error);
         });
 });
+
+function restaurantDetail(restaurantId)
+{
+    if(localStorage.getItem('currentRestaurant') != null)
+    {
+        localStorage.removeItem('currentRestaurant');
+    }
+    let currentRestaurant = {
+        'currentRestaurantId': restaurantId
+    }
+    localStorage.setItem('currentRestaurant', JSON.stringify(currentRestaurant));
+    location.assign("./detail-restaurant.html");
+    //window.location.href('./detail-restaurant.html');
+}

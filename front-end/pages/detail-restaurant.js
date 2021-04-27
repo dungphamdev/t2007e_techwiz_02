@@ -1,3 +1,7 @@
+let listItems = [];
+
+//const { data } = require("jquery");
+var item = [];
 function myFunction() {
   var dots = document.getElementById("dots");
   var moreText = document.getElementById("more");
@@ -13,66 +17,376 @@ function myFunction() {
     moreText.style.display = "inline";
   }
 }
-$("#decreaseBtn-1").click(function () {
-  let val = $("#quantityInOrder").val();
-  if (val > 1) {
-    $("#quantityInOrder").val(val - 1); 
-  }
-});
-$("#increaseBtn-1").click(function () {
-  let val = $("#quantityInOrder").val();
-  $("#quantityInOrder").val(parseInt(val) + 1);
-});
-var pricetxt = $("#priceInOrder").text();
-var price = parseFloat(pricetxt.replace("$", ""));
-$("#sumPriceInOrder").text(pricetxt);
-$(".adjustAmountBtn").click(function () {
-  let sumPrice = price * $("#quantityInOrder").val();
-  $("#sumPriceInOrder").text("$" + sumPrice);
-});
 
-$(".productInBasket").each(function(){
-  $(this).find(".decreaseBtn-2").click(function(){
-      let quantity = $(this).parent().find(".quantityInBasket").val();
-      if (quantity > 1) {
-          $(this).parent().find(".quantityInBasket").val(quantity - 1);
-      }
-  });
-  $(this).find(".increaseBtn-2").click(function(){
-      let quantity = $(this).parent().find(".quantityInBasket").val();
-      $(this).parent().find(".quantityInBasket").val(parseInt(quantity) + 1);
-      console.log(parseInt(quantity) + 1);
-  });
-});
+
+// $(function () {
+//   //get list items;
+//   data = {};
+//   fetch('http://localhost:4000/api/item/list', {
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(data),
+//   })
+//       .then(response => response.json())
+//       .then(res => {
+//           let listItem = res.list ?? [];
+//           //generate DOM
+//           let items='';
+//           console.log(listItem);
+//           let options = {
+//               data:listItem,
+//               getValue: "restaurantName",
+//               list: {
+//                   match: {
+//                       enabled: true
+//                   }
+//               }
+//           };  
+
+//       })
+//       .catch((error) => {
+//           console.error('Error:', error);
+//       });
+// });
 
 $(function () {
-  //get list items;
-  data = {};
-  fetch('http://localhost:4000/api/item/list', {
+  if(localStorage.getItem('currentRestaurant') == null)
+  {
+    return;
+  }
+  let restaurant = JSON.parse(localStorage.getItem('currentRestaurant'));
+  let currentrestaurantId = restaurant.currentRestaurantId;
+  model = {
+    'RestaurantId' : Number(currentrestaurantId)
+  };
+  fetch('http://localhost:4000/api/restaurant/getRestaurantById', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(model),
   })
-      .then(response => response.json())
-      .then(res => {
-          let listItem = res.list ?? [];
-          //generate DOM
-          let items='';
-          console.log(listItem);
-          let options = {
-              data:listItem,
-              getValue: "restaurantName",
-              list: {
-                  match: {
-                      enabled: true
-                  }
-              }
-          };  
+  .then(response => response.json())
+  .then(res => {
+    var result = JSON.stringify(res);
+    var detailRestaurant = JSON.parse(result);
+    
+    var listItemofcurrentRestaurant = detailRestaurant.restaurantDetail.listItem;
+    let html = '';
+    let html1 = `<h2 >${detailRestaurant.restaurantDetail.restaurantName}</h2>
+    <p>&nbsp;</p>
+    <p style="color: #a0a0a0" class="ml-2">
+      ${detailRestaurant.restaurantDetail.restaurantAddress}
+      <br/>
+      Email: ${detailRestaurant.restaurantDetail.restaurantEmail} - Contact phone number: ${detailRestaurant.restaurantDetail.restaurantPhone}
+    </p>
+    <p class="ml-2" style="color: #a0a0a0">
+      <span>Opening time: </span>Today 08:00-21:30
+    </p>`
+    console.log(detailRestaurant.restaurantDetail)
+    //html2 += detailRestaurant.
+    $('#restaurantDeltai').html(html1);
+    for(var i=0; i<listItemofcurrentRestaurant.length;i++)
+    {
+      let iteminfo = {
+        'id' : listItemofcurrentRestaurant[i].itemId,
+        'image': listItemofcurrentRestaurant[i].imageSrc,
+        'name' : listItemofcurrentRestaurant[i].itemName,
+        'desc' : listItemofcurrentRestaurant[i].itemDescription,
+        'price' : listItemofcurrentRestaurant[i].itemPrice
+      };
+      item.push(JSON.stringify(iteminfo));
+      html += `<div class="col-md-4 col-sm-10">
+      <div class="row">
+        <div class="col-5">
+          <div>
+            <img width="120px" height="180px" src=${listItemofcurrentRestaurant[i].imageSrc} alt="${listItemofcurrentRestaurant[i].imageName}">
+          </div>
+        </div>
+        <div class="col-7 text-left">
+          <p>${listItemofcurrentRestaurant[i].itemName}</p>
+          <span>${listItemofcurrentRestaurant[i].itemDescription}</span>
+          <span><br>-----------------------------</span>
+          <div class="row">
+            <div class="col-6">
+              <p style="font-weight: 700; font-size: 18px">$${listItemofcurrentRestaurant[i].itemPrice}</p>
+            </div>
+            <div class="col-6">
+              <div class="mt-1 ml-5">
+                <!-- <button data-toggle="modal" data-target="#order-1">Start Modal</button> -->
+                <a href="" data-toggle="modal" data-target="#order-2" onclick="showModalOrder('${listItemofcurrentRestaurant[i].itemId}')">
+                  <img width="30px" height="auto" src="../food-restaurant/plus1.png" alt="plusSign">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    `;
+    }
+    $('#mainproduct').html(html);
+  })
+  .catch((error) => {
+      //alert('Too many item in Cart');
+      console.error('Error:', error);
+  });
+})
+var itemclone = {};
+function showModalOrder(id)
+{
+  //let parsItem = JSON.parse(item);
+  
+  for(let i=0;i<item.length;i++)
+  {
+    let parsItem = JSON.parse(item[i]);
+    if(Number(id) == Number(parsItem.id))
+    {
+      itemclone = parsItem;
+    }
+  }
+ 
+  let html = `                
+  <div class="col-md-3">
+  <div class="productImg">
+    <img
+      class="img-fluid"
+      src="${itemclone.image}"
+      alt=""
+    />
+  </div>
+</div>
+<div class="col-md-9">
+  <div class="row d-flex justify-content-start">
+    <div class="col-md-6 text-left">
+      <h5 class="text-dark font-weight-bold">
+      ${itemclone.name}
+      </h5>
+    </div>
+    <div class="col-md-6">
+      <h5 id="priceInOrder" class="text-dark font-weight-bold">
+        $${itemclone.price}
+      </h5>
+    </div>
+    <div class="col-md-12 text-left small">
+      <span> ${itemclone.desc}</span>
+    </div>
+  </div>
+</div>`;
+  $('#infoitem').html(html); 
+}
 
-      })
-      .catch((error) => {
-          console.error('Error:', error);
+$(function () {
+  let cartclone = JSON.parse(localStorage.getItem('currentCart'));
+  let data = {
+    "listItemId": [...cartclone]
+  }
+  if(cartclone.length > 0)
+  {
+    
+    fetch('http://localhost:4000/api/item/getImageById', {
+      method: 'POST',
+      async: false,
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(res => {
+      var result = JSON.stringify(res); 
+      listItems = res.listItem;
+      let html = '';
+      let parseResult = JSON.parse(result).listItem;
+      let money = 0;
+      for(let i = 0; i<parseResult.length;i++)
+      {
+        money += Number(parseResult[i].itemPrice);
+        html += `              
+        <div class="row productInBasket py-3 border-bottom">
+        <div class="col-md-3 col-4 pr-0">
+          <button
+            class="adjustAmountBtn-small decreaseBtn-2 p-0 bg-transparent text-success"
+            type="button"
+          >
+            <h4 class="font-weight-bold">-</h4>
+          </button>
+          <input id="${parseResult[i].itemId}"
+            type="number"
+            class="quantityInBasket border-0 text-center"
+            min="1"
+            value="1"
+          />
+          <button
+            class="adjustAmountBtn-small increaseBtn-2 p-0 bg-transparent text-success"
+            type="button"
+          >
+            <h4 class="font-weight-bold">+</h4>
+          </button>
+        </div>
+        <div class="col-md-9 col-8 p-0">
+          <div class="row">
+            <div class="col-3">
+              <div class="productImgInBasket">
+                <img
+                  height="200px" width="auto"
+                  class="img-fluid"
+                  src="${parseResult[i].imageSrc}"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="font-weight-bold">${parseResult[i].itemName}</div>
+              <small class="font-weight-bold">Prompt: </small
+              ><small class="small">No onions, please.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      `;
+      }
+      $('#money').html('$'+money);
+      // generateTotalText();
+
+      $('#mainCart').html(html);
+      
+      $(".productInBasket").each(function(){
+        $(this).find(".decreaseBtn-2").click(function(){
+       
+            let quantity = $(this).parent().find(".quantityInBasket").val();
+            if (quantity > 1) {
+                $(this).parent().find(".quantityInBasket").val(quantity - 1);
+            }
+            let Money = Number($('#money').text().replace('$',''));
+            // generateTotalText();
+        });
+        $(this).find(".increaseBtn-2").click(function(){
+          let Money = Number($('#money').text().replace('$',''));
+            let quantity = $(this).parent().find(".quantityInBasket").val();
+            $(this).parent().find(".quantityInBasket").val(parseInt(quantity) + 1);
+            // generateTotalText();
+        });
+        
       });
+    })
+    .catch((error) => {
+        //alert('Too many item in Cart');
+        console.error('Error:', error);
+    });
+  }
+})
+function addtoCart()
+{
+  if(localStorage.getItem('customer') == null)
+  {
+    alert('Please login!');
+    return;
+  }
+  let cart = JSON.parse(localStorage.getItem('currentCart'));
+  if(cart != null)
+  {
+    var check = true;
+    for(let i=0;i<cart.length;i++)
+    {
+        if(cart[i] == Number(itemclone.id))
+        {
+          check = false;          
+        }
+           
+    }
+    if(check)
+    {
+      cart.push(Number(itemclone.id));  
+    }
+  }
+  else
+  {
+    cart = [Number(itemclone.id)];
+  }
+
+  localStorage.setItem('currentCart', JSON.stringify(cart));
+  openCart();
+}
+
+function openCart()
+{
+  $('#mainCart').show();
+ 
+}
+
+function sendOrder()
+{
+  if(localStorage.getItem('customer') == null)
+  {
+    alert('Please login!');
+    return;
+  }
+  //aaaaaaaaaaaaaaaaaaaaaaaaaaa
+  
+    var productArr = [];
+    $(".productInBasket").each(function(){
+      let ItemQty = $(this).find(".quantityInBasket").val();
+      let ItemId = $(this).find(".quantityInBasket").attr("id");
+      console.log(ItemId)
+      let productObj = {'ItemId': Number(ItemId), 'ItemQty': Number(ItemQty)};
+      productArr.push(productObj);
+    });
+    localStorage.setItem('currentproductArr',productArr);
+
+  let cart = JSON.parse(localStorage.getItem('currentCart'));
+  let customer = JSON.parse(localStorage.getItem('customer'));
+  let customerId = customer.customerId;
+  let restaurant = JSON.parse(localStorage.getItem('currentRestaurant'));
+  let currentrestaurantId = restaurant.currentRestaurantId;
+  model = {
+    "billingItem": {
+      "customerId": Number(customerId),
+      "restaurantId": Number(currentrestaurantId),
+      "billAmout": Number(0),
+      "orderDate": "2021-04-27T08:21:42.975Z",
+      "orderDetail": productArr
+    }
+  };
+  fetch('http://localhost:4000/api/billing/createOrder', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(model),
+  })
+  .then(response => response.json())
+  .then(res => {
+    var result = JSON.stringify(res);
+  }).catch((error) => {
+    //alert('Too many item in Cart');
+    console.error('Error:', error);
 });
+}
+
+// function calculateTotalAmount(){
+//   console.log('listItem:',listItems )
+//   let result = 0;
+//   $(".quantityInBasket").each(function(){
+//     let ItemQty = $(this).val();
+//     let ItemId = $(this).find(".quantityInBasket").attr("id");
+//     // console.log(ItemId)
+//     let item = listItems.find(e => e.itemId == ItemId);
+//     // console.log(ItemId)
+//     if (item) {
+//       result += ItemQty * item.itemPrice;
+//     }
+//   });
+
+//   console.log()
+//   return result;
+// }
+
+// function generateTotalText(){
+//   let amount = calculateTotalAmount();
+//   $('#money').html('$'+ amount);
+// }
