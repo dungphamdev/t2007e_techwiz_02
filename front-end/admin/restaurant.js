@@ -4,6 +4,9 @@ let listRestaurants = [];
 
 $(function () {
   //get list restaurants;
+  getList();
+});
+function getList(){
   data = {};
   fetch("http://localhost:4000/api/restaurant/list", {
     method: "POST",
@@ -38,7 +41,7 @@ $(function () {
       listRestaurants.forEach((e, i) => {
         html += `
                 <tr>
-              <td>${i++}</td>
+              <td>${++i}</td>
               <td>${e.restaurantName}</td>
               <td>${e.restaurantAddress}</td>
               <td>${e.restaurantEmail}</td>
@@ -47,19 +50,21 @@ $(function () {
                 <div class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modalAddRestaurant" onclick="editRecord('${
                   e.restaurantId
                 }')">Edit</div>
-                <div class="btn btn-sm btn-danger" onclick="deleteRecord()">Delete</div>
+                <div class="btn btn-sm btn-danger" onclick="deleteRecord('${
+                  e.restaurantId
+                }')">Delete</div>
               </td>
             </tr>
                 `;
       });
-      $("#tableBody").append(html);
+      $("#tableBody").html(html);
     })
     .catch((error) => {
       console.error("Error:", error);
     });
-});
-
+}
 $("#openModalBtn").click(() => {
+  $("#id").val(0);
   $("#branch-form").trigger("reset");
   $("#oldImg").hide()
 })
@@ -85,12 +90,43 @@ function editRecord(restaurantId) {
 
   $("#createBtn").html("Save");
 }
+  
+function deleteRecord(restaurantId) {
+  data = {
+    'restaurantId': Number(restaurantId)
+  };
 
-function deleteRecord() {
-  console.log();
+  console.log(data)
+
+  if (confirm("Ban chac chan muon xoa hay khong?")){
+    fetch("http://localhost:4000/api/restaurant/delete", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        console.log("Success:", res);
+        let response = { ...res };
+        if (response.statusCode === 200) {
+          // thoong bao thanh cong
+          getList();
+        } else {
+          // thong bao loi
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 }
 
 async function createRestaurant() {
+  // validate
+
+  // thuoc tinh mapping voi thuoc tinh cua api
   let restaurantModel = {
     restaurantName: "",
     restaurantAddress: "",
@@ -141,6 +177,7 @@ async function createRestaurant() {
         let response = { ...res };
         if (response.statusCode === 200) {
           // thoong bao thanh cong
+          getList();
         } else {
           // thong bao loi
         }
@@ -202,3 +239,4 @@ $("#restaurantImage").change(() => {
   let fileName = path.split("\\").pop();
   $(".custom-file label").text(fileName);
 });
+
